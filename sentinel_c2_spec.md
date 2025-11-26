@@ -1,7 +1,7 @@
 # ESPECIFICAÇÃO TÉCNICA: SENTINEL C2 - KERNEL DO BACKEND
 
 **Versão:** 1.0.6  
-**Status:** Aprovado  
+**Status:** Rascunho de Aprovação  
 **Data:** 25 de Outubro de 2025  
 **Arquitetura:** Clean Architecture / Hexagonal
 
@@ -50,6 +50,8 @@ Este schema armazena o estado da aplicação e os metadados dos agentes.
 | `hostname` | VARCHAR(100) | Nome de rede do host. |
 | `os_info` | VARCHAR(100) | Versão do Sistema Operacional. |
 | `status` | ENUM | Estado atual (ONLINE, OFFLINE, DEAD). |
+| `communication_mode` | ENUM | Modo de comunicação (SESSION, BEACON). Default: SESSION. |
+| `beacon_interval` | INTEGER | Intervalo em segundos para modo Beacon. Default: NULL (não aplicável em SESSION). |
 | `last_seen` | TIMESTAMP | Carimbo de tempo do último heartbeat recebido. |
 
 **Tabela `commands`**
@@ -108,8 +110,11 @@ Os seguintes tipos de comandos devem ser suportados pelo Backend e pelo Agente.
 | `PROCESS_LIST` | Lista processos ativos. | `[]` (Vazio) |
 | `OPEN_URL` | Abre uma URL no navegador padrão. | `["https://site.com"]` |
 | `SHUTDOWN` | Desliga o computador remoto. | `[]` (Vazio) |
+| `SWITCH_MODE` | Alterna entre modo Session e Beacon. | `["session"]` ou `["beacon", "intervalo_segundos"]` |
 
 > **Nota sobre Shell:** O payload para `SHELL` deve ser flexível. Para rodar no CMD, usar `["cmd", "/c", "comando"]`. Para PowerShell, `["powershell", "-c", "comando"]`.
+
+> **Nota sobre SWITCH_MODE:** Este comando permite o Backend alternar o modo de comunicação do agente. Modo `session` mantém conexão persistente (baixa latência), enquanto modo `beacon` utiliza check-ins periódicos (alta furtividade). Exemplo: `["beacon", "300"]` configura check-ins a cada 5 minutos.
 
 ### 3.3 Telemetria (Heartbeat)
 
