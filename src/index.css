@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   SENTINEL VISION - Global Styles
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-sentinel-border;
+  }
+
+  body {
+    @apply bg-void-900 text-white font-display antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-void-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-sentinel-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-sentinel-text;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-neon-pink/30 text-white;
+  }
+}
+
+@layer components {
+  /* Gradient Line (Header separator) */
+  .gradient-line {
+    @apply h-0.5 w-full;
+    background: linear-gradient(90deg, #4632f0, #eb055a);
+    animation: gradient-pulse 5s ease infinite;
+  }
+
+  @keyframes gradient-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  /* Glitch Text Effect */
+  .glitch-text {
+    @apply relative;
+    animation: glitch 2s infinite;
+  }
+
+  /* Card Base */
+  .card {
+    @apply bg-void-800 border border-sentinel-border rounded-lg p-4;
+    @apply transition-all duration-150;
+  }
+
+  .card-hover {
+    @apply hover:border-neon-pink hover:shadow-neon-pink;
+  }
+
+  /* Input Base */
+  .input {
+    @apply bg-void-700 border border-sentinel-border rounded px-3 py-2;
+    @apply text-white placeholder-sentinel-muted;
+    @apply focus:outline-none focus:border-neon-pink focus:ring-1 focus:ring-neon-pink/50;
+    @apply transition-all duration-150;
+  }
+
+  /* Button Base */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply font-display font-medium px-4 py-2 rounded;
+    @apply border transition-all duration-150;
+    @apply focus:outline-none focus:ring-2 focus:ring-neon-pink/50;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-neon-pink border-neon-pink text-white;
+    @apply hover:bg-neon-pink/80 hover:shadow-neon-pink;
+  }
+
+  .btn-secondary {
+    @apply bg-void-700 border-sentinel-border text-white;
+    @apply hover:bg-void-600 hover:border-sentinel-text;
+  }
+
+  .btn-danger {
+    @apply bg-neon-red/20 border-neon-red text-neon-red;
+    @apply hover:bg-neon-red/40 hover:shadow-neon-red;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent border-transparent text-sentinel-text;
+    @apply hover:bg-void-700 hover:text-white;
+  }
+
+  /* Status Indicators */
+  .status-dot {
+    @apply w-2.5 h-2.5 rounded-full;
+  }
+
+  .status-online {
+    @apply bg-neon-green shadow-neon-green;
+  }
+
+  .status-offline {
+    @apply bg-sentinel-text;
+  }
+
+  .status-dead {
+    @apply bg-neon-red shadow-neon-red;
+  }
+
+  /* Tab Navigation */
+  .tab {
+    @apply px-4 py-2 font-display font-medium text-sentinel-text;
+    @apply border-b-2 border-transparent;
+    @apply transition-all duration-150;
+    @apply hover:text-white;
+  }
+
+  .tab-active {
+    @apply text-white border-neon-pink;
+  }
+
+  /* Terminal Styles */
+  .terminal {
+    @apply bg-black border border-sentinel-border rounded-lg;
+    @apply font-mono text-xs p-4 overflow-auto;
+  }
+
+  .terminal-prompt {
+    @apply text-neon-pink;
+  }
+
+  .terminal-output {
+    @apply text-neon-green;
+  }
+
+  .terminal-error {
+    @apply text-neon-red;
+  }
+
+  .terminal-command {
+    @apply text-sentinel-muted;
+  }
+
+  /* Progress Bar */
+  .progress-bar {
+    @apply h-1 bg-void-600 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-300;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-mono;
+  }
+
+  .badge-pink {
+    @apply bg-neon-pink/20 text-neon-pink border border-neon-pink/50;
+  }
+
+  .badge-purple {
+    @apply bg-neon-purple/20 text-neon-purple border border-neon-purple/50;
+  }
+
+  .badge-green {
+    @apply bg-neon-green/20 text-neon-green border border-neon-green/50;
+  }
+
+  .badge-red {
+    @apply bg-neon-red/20 text-neon-red border border-neon-red/50;
+  }
+
+  /* Tooltip */
+  .tooltip {
+    @apply absolute z-50 px-2 py-1 text-xs rounded;
+    @apply bg-void-700 border border-sentinel-border text-white;
+    @apply shadow-lg;
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    @apply fixed inset-0 z-50;
+    @apply bg-black/70 backdrop-blur-sm;
+    @apply flex items-center justify-center;
+  }
+
+  .modal-content {
+    @apply bg-void-800 border border-sentinel-border rounded-lg;
+    @apply shadow-2xl max-w-md w-full mx-4;
+    @apply animate-slide-up;
+  }
+}
+
+@layer utilities {
+  /* Text Glow */
+  .text-glow-pink {
+    text-shadow: 0 0 10px rgba(235, 5, 90, 0.5);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Truncate with ellipsis */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
